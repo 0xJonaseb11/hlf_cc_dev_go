@@ -1,0 +1,96 @@
+{
+  "network-configs": {
+    "network-1": {
+      "version": "1.0",
+      "clients": {
+        "client-1": {
+          "tlsEnable": false,
+          "organization": "AcmeMSP",
+          "channel": "airlinechannel",
+          "credentialStore": {
+            "path": "./tmp/credentialStore_Org1/credential",
+            "cryptoStore": {
+              "path": "./tmp/credentialStore_Org1/crypto"
+            }
+          }
+        }
+      },
+      "channels": {
+        "airlinechannel": {
+          "peers": {
+            "acme-peer1.acme.com": {},
+            "budget-peer1.budget.com": {}
+          },
+          "connection": {
+            "timeout": {
+              "peer": {
+                "endorser": "6000",
+                "eventHub": "6000",
+                "eventReg": "6000"
+              }
+            }
+          }
+        }
+      },
+      "organizations": {
+        "AcmeMSP": {
+          "mspid": "AcmeMSP",
+          "fullpath": false,
+          "adminPrivateKey": {
+            "path": "/vagrant/network/crypto/crypto-config/peerOrganizations/acme.com/users/Admin@acme.com/msp/keystore"
+          },
+          "signedCert": {
+            "path": "/vagrant/network/crypto/crypto-config/peerOrganizations/acme.com/users/Admin@acme.com/msp/signcerts"
+          }
+        },
+        "BudgetMSP": {
+          "mspid": "BudgetMSP",
+          "adminPrivateKey": {
+            "path": "/vagrant/network/crypto/crypto-config/peerOrganizations/budget.com/users/Admin@budget.com/msp/keystore"
+          }
+        },
+        "OrdererMSP": {
+          "mspid": "OrdererMSP",
+          "adminPrivateKey": {
+            "path": "/vagrant/network/crypto/crypto-config/ordererOrganizations/acme.com/users/Admin@acme.com/msp/keystore"
+          }
+        }
+      },
+      "peers": {
+        "acme-peer1.acme.com": {
+          "url": "grpc://acme-peer1.acme.com:7051",
+          "tlsCACerts": {
+            "path": "/home/vagrant/bins/cert/ca.crt"
+          },
+          "eventUrl": "grpc://acme-peer1.acme.com:7053",
+          "grpcOptions": {
+            "ssl-target-name-override": "acme-peer1.acme.com"
+          }
+        },
+        "budget-peer1.budget.com": {
+          "url": "grpc://budget-peer1.budget.com:8051",
+          "tlsCACerts": {
+            "path": "/home/vagrant/bins/cert/ca.crt"
+          },
+          "eventUrl": "grpc://budget-peer1.budget.com:8053",
+          "grpcOptions": {
+            "ssl-target-name-override": "budget-peer1.budget.com"
+          }
+        }
+      },
+      "orderers": {
+        "orderer.acme.com": {
+          "url": "grpc://orderer.acme.com:7050"
+        }
+      },
+      "certificateAuthorities": {
+        "ca.server.com": {
+          "url": "http://localhost:7054"
+        }
+      }
+    },
+    "network-2": {}
+  },
+  "configtxgenToolPath": "/usr/local/bin",
+  "license": "Apache-2.0"
+}

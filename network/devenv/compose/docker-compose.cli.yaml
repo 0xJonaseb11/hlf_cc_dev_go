@@ -1,0 +1,42 @@
+# Docker compose for multi-org-ca-1
+#DEV_MODE_NET
+version: '2'
+
+networks:
+  airline:
+
+services:
+  
+  tools:
+    container_name: tools
+    command: /bin/bash
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_PEER_ADDRESS=acme-peer1.acme.com:7051
+      - CORE_PEER_LOCALMSPID=AcmeMSP
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - CORE_PEER_TLS_ENABLED=false
+      # - CORE_LOGGING_LEVEL=debug
+      - FABRIC_LOGGING_SPEC=DEBUG
+    working_dir: /opt/scripts
+    volumes:
+      - ${GOPATH}:/opt/gopath
+      # Folder with channel create tx file
+      - ${PWD}/../artefacts:/var/hyperledger/channeltx
+      # Map the folder to root of all Fabric CA Client crypto
+      - ${PWD}/../crypto/crypto-config/peerOrganizations:/var/hyperledger/crypto
+      # Map the current folder to cfg
+      - ${PWD}/../config:/var/hyperledger/config
+      # VM docker stream folder mapping
+      - /var/run/:/host/var/run/
+      # Map the bins folder
+      - ${PWD}/../scripts:/opt/scripts
+      # Map the nodechaincode folder
+      - ${PWD}/../tests:/opt/chaincode
+    networks:
+      - airline
+  
+  

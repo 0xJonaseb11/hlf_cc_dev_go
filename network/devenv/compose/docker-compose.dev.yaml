@@ -1,0 +1,23 @@
+# Docker compose for multi-org-ca-1
+#DEV_MODE_DEV
+version: '2'
+
+networks:
+  airline:
+
+services:
+  
+
+  # Acme peer1
+  acme-peer1.acme.com:
+    container_name: acme-peer1.acme.com
+    
+    command: peer node start --peer-chaincodedev=true
+    
+
+  # Budget peer1
+  budget-peer1.budget.com:
+    container_name: budget-peer1.budget.com
+    
+    command: peer node start --peer-chaincodedev=true
+    

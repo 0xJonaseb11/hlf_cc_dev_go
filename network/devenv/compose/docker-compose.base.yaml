@@ -1,0 +1,203 @@
+# Docker compose for multi-org-ca-1
+#DEV_MODE_NET
+version: '2'
+
+networks:
+  airline:
+
+services:
+  # Orderer
+  orderer.acme.com:
+    container_name: orderer.acme.com
+    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      # - ORDERER_GENERAL_LOGLEVEL=DEBUG
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LISTENADDRESS=orderer.acme.com
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/genesis/airline-genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/msp
+      - ORDERER_FILELEDGER_LOCATION=/var/ledger
+    working_dir: $HOME
+    command: orderer
+    volumes:
+    # Folder with genesis block
+    - ${PWD}/../config:/var/hyperledger/genesis
+    # Map the folder with MSP for orderer
+    - ${PWD}/../crypto/crypto-config/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp:/var/hyperledger/msp
+    # Map the current folder to cfg
+    - ${PWD}/../config:/var/hyperledger/config
+    - ${HOME}/ledgers/orderer.acme.com:/var/ledger
+    ports:
+      - 7050:7050
+    networks:
+      - airline
+
+  # Acme peer1
+  acme-peer1.acme.com:
+    container_name: acme-peer1.acme.com
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      # - CORE_LOGGING_LEVEL=debug
+      - FABRIC_LOGGING_SPEC=DEBUG
+
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_airline
+
+      - CORE_PEER_ID=acme-peer1.acme.com
+      # - CORE_PEER_LISTENADDRESS=budget-peer1.budget.com:7051
+      - CORE_PEER_ADDRESS=acme-peer1.acme.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=acme-peer1.acme.com:7051
+      # - CORE_PEER_ADDRESS=0.0.0.0:7051
+      # - CORE_PEER_GOSSIP_EXTERNALENDPOINT=0.0.0.0:7051
+
+      - CORE_PEER_LOCALMSPID=AcmeMSP
+      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/msp
+      - CORE_PEER_TLS_ENABLED=false
+      # - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      # - CORE_PEER_GOSSIP_ORGLEADER=false
+      # - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_FILESYSTEMPATH=/var/ledger
+      # - CORE_PEER_ADDRESS=0.0.0.0
+    working_dir: $HOME
+    # command: peer node start --peer-chaincodedev=true
+    command: peer node start
+
+    volumes:
+      # Folder with channel create tx file
+      - ${PWD}/../config:/var/hyperledger/channeltx
+      # Map the folder with MSP for Peer
+      - ${PWD}/../crypto/crypto-config/peerOrganizations/acme.com/peers/acme-peer1/msp:/var/hyperledger/msp
+      # Map the current folder to cfg
+      - ${PWD}/../config:/var/hyperledger/config
+      - /var/run/:/host/var/run/
+      # Ledger folder for the peer
+      - ${HOME}/ledgers/acme-peer1.acme.com/:/var/ledger
+    depends_on: 
+      - orderer.acme.com
+    ports:
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
+    networks:
+      - airline
+
+  # Budget peer1
+  budget-peer1.budget.com:
+    container_name: budget-peer1.budget.com
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      # - CORE_LOGGING_LEVEL=debug
+      - FABRIC_LOGGING_SPEC=DEBUG
+
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_airline
+
+      - CORE_PEER_ID=budget-peer1.budget.com
+      - CORE_PEER_ADDRESS=budget-peer1.budget.com:8051
+      # - CORE_PEER_LISTENADDRESS=budget-peer1.budget.com:8051
+      - CORE_PEER_LISTENADDRESS=budget-peer1.budget.com:8051
+      - CORE_PEER_CHAINCODELISTENADDRESS=budget-peer1.budget.com:8052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=budget-peer1.budget.com:8051
+      - CORE_PEER_LOCALMSPID=BudgetMSP
+      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/msp
+      - CORE_PEER_TLS_ENABLED=false
+      # - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      # - CORE_PEER_GOSSIP_ORGLEADER=false
+      # - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_FILESYSTEMPATH=/var/ledger
+    working_dir: $HOME
+    # command: peer node start --peer-chaincodedev=true
+    command: peer node start
+
+    volumes:
+      # Folder with channel create tx file
+      - ${PWD}/../config:/var/hyperledger/channeltx
+      # Map the folder with MSP for Peer
+      - ${PWD}/../crypto/crypto-config/peerOrganizations/budget.com/peers/budget-peer1/msp:/var/hyperledger/msp
+      # Map the current folder to cfg
+      - ${PWD}/../config:/var/hyperledger/config
+      - /var/run/:/host/var/run/
+      # Ledger folder for the peer
+      - ${HOME}/ledgers/budget-peer1.budget.com:/var/ledger
+    depends_on: 
+      - orderer.acme.com
+    ports:
+      - 8051:8051
+      - 8052:8052
+      - 8053:8053
+    networks:
+      - airline
+
+  # tools:
+  #   container_name: tools
+  #   command: /bin/bash
+  #   image: hyperledger/fabric-tools:$IMAGE_TAG
+  #   tty: true
+  #   stdin_open: true
+  #   environment:
+  #     - GOPATH=/opt/gopath
+  #     - CORE_PEER_ADDRESS=acme-peer1.acme.com:7051
+  #     - CORE_PEER_LOCALMSPID=AcmeMSP
+  #     - FABRIC_CFG_PATH=/var/hyperledger/config
+  #     - CORE_PEER_TLS_ENABLED=false
+  #     - CORE_LOGGING_LEVEL=debug
+  #   working_dir: /opt/scripts
+  #   volumes:
+  #     - ${GOPATH}:/opt/gopath
+  #     # Folder with channel create tx file
+  #     - ${PWD}/../artefacts:/var/hyperledger/channeltx
+  #     # Map the folder to root of all Fabric CA Client crypto
+  #     - ${PWD}/../crypto/crypto-config/peerOrganizations:/var/hyperledger/crypto
+  #     # Map the current folder to cfg
+  #     - ${PWD}/../config:/var/hyperledger/config
+  #     # VM docker stream folder mapping
+  #     - /var/run/:/host/var/run/
+  #     # Map the bins folder
+  #     - ${PWD}/../scripts:/opt/scripts
+  #     # Map the nodechaincode folder
+  #     - ${PWD}/../tests:/opt/chaincode
+  #   networks:
+  #     - airline
+  
+  # Postgres
+  # postgresql:
+  #   container_name: postgresql
+  #   image: postgres:9.5
+  #   environment:
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_USER=postgres
+      
+  #   working_dir: $HOME
+  #   volumes:
+  #   # Folder with genesis block
+  #   #- ${PWD}:/etc/postgresql/9.5/main
+  #   - $PWD/explorer/bins:/home/vagrant/bins
+  #   - /var/run/postgresql:/var/run/postgresql
+  #   ports:
+  #     - 5432:5432
+  #   networks:
+  #     - airline
+  
+  # explorer:
+  #   container_name: explorer
+  #   image: acloudfan/hlf-explorer
+  #   environment:
+  #     - DATABASE_PASSWORD=postgres
+  #     - DATABASE_HOST=postgresql
+  #   volumes:
+  #     - $PWD/explorer/bins:/home/vagrant/bins
+  #     - $PWD/../crypto:/vagrant/network/crypto
+  #     - /var/run/postgresql:/var/run/postgresql
+  #   ports:
+  #     - 8080:8080
+  #   depends_on: 
+  #     - postgresql
+  #   networks:
+  #     - airline

@@ -1,0 +1,54 @@
+# Docker compose for multi-org-ca-1
+#DEV_MODE_DEV
+version: '2'
+
+networks:
+  airline:
+
+services:
+  
+
+  # Acme peer1
+  acme-peer1.couchdb:
+    container_name: acme-peer1.couchdb
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "5984:5984"
+    networks:
+      - airline
+
+  acme-peer1.acme.com:
+    container_name: acme-peer1.acme.com
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=acme-peer1.couchdb:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - acme-peer1.couchdb
+
+  # Budget peer1
+  budget-peer1.couchdb:
+    container_name: budget-peer1.couchdb
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "6984:5984"
+    networks:
+      - airline
+
+  budget-peer1.budget.com:
+    container_name: budget-peer1.budget.com
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=budget-peer1.couchdb:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - budget-peer1.couchdb
+    

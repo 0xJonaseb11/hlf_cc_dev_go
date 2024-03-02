@@ -1,0 +1,27 @@
+# Docker compose for overriding the State DB setup for the peers
+version: '2'
+
+networks:
+  airline:
+
+services:
+  root.caserver.com:
+    container_name: root.caserver.com
+    hostname: root
+    domainname: caserver.com
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=root.caserver
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      # - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
+      # - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start --cfg.identities.allowremove --cfg.affiliations.allowremove' 
+    volumes:
+      - ${PWD}/server:/etc/hyperledger/fabric-ca-server
+    
+    networks:
+      - airline
+    
