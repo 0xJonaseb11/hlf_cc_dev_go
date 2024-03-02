@@ -21,13 +21,63 @@ solutions
   - Go LTS
   - Node.js LTS
   
-- Check for installed
+## `Check for installed`
 
 ```sh
 docker --version
 docker-compose --version
 curl --version
+orderer version
+peer version
+go --version
+vagrant --version
+
  ```
+
+ ```sh
+ # validate go-tools
+ govendor -h
+ # validate fabric
+ ./validate-fabric.sh
+ # validate git-repo updates
+ ./validate-git-repo.sh
+ # validate prerequisites
+ ./validate-prereqs.sh
+ # validate setup
+ ./validate-setup.sh
+ # validate hyperledger explorer
+ ./validate-explorer.sh
+# validate node
+node -v
+
+ ```
+
+## `Update git repo`
+
+ ```sh
+ ./update-git-repo.sh
+ ```
+
+### `Install dependencies`
+
+```sh
+vagrant up
+vagrant ssh
+cd network/setup
+
+# install prerequisites
+./install-preqs.sh
+# install hyperledger explorer
+./install-explorer.sh
+# install fabric
+./install-fabric.sh
+# install nodejs utilities
+./install-node-utils.sh
+
+
+
+
+```
 
 --------------------
 
