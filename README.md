@@ -154,16 +154,47 @@ peer chaincode upgrade
 peer chaincode instantiate
 ```
 
-
-## `Working of hyperledger explorer`
+## `Working with hyperledger explorer`
 
 ```sh
 # Reset the explorer runtime
 exp-init.sh -e
 # Stop the running explorer containers
 exp-stop.sh
-# Restarts the explorer containers
+# Restart the explorer containers
 exp-start.sh  
+```
+
+## `Chaincode development scripts`
+
+```sh
+# Execute peer chaincode commands
+chain.sh
+# set environemt variables for chaincode arguments || With no flags displays the current setup
+set-chain-env.sh
+# Access the command arguments in Environent variables
+cc.env.sh
+# Show all the envoronemt variables set using `set-chain-env.sh`
+show-chain-env.sh
+# Reset chaincode environment
+reset-chain-env.sh
+
+## Let's try to change the name of the chaincode
+set-chain-env.sh -n new_chaincode_name
+
+# Query the peer and get the instant chaincode from it
+chain.sh queryinstalled
+# Query the gocc chaincode installed at my peer
+chain.sh query
+# Let's get the command the chain.sh will execute
+chain.sh querycommitted -o
+
+
+
+
+## Get every list of flags
+set-chain-env.sh -h
+
 
 ```
 
