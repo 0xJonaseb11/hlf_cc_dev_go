@@ -13,13 +13,16 @@ Vagrant.configure("2") do |config|
 
     ######## March 23, 2020 - Support for express setup
     # Please read the instructions under network/setup/vexpress/README.md
+      config.vm.provider "virtualbox"
+    
+    
     # March 24, 2020 - changed to 18.04
     
     # 1. Use this for "Standard setup"
     config.vm.box = "bento/ubuntu-18.04"
 
     # 2. Use this for "VirtualBox Express Setup"
-    # config.vm.box = "acloudfan/hlfdev2.0-0"
+    config.vm.box = "acloudfan/hlfdev2.0-0"
 
 
     # Uncomment the lines below if you would like to protect the VM
