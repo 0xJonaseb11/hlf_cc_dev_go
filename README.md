@@ -74,10 +74,99 @@ cd network/setup
 # install nodejs utilities
 ./install-node-utils.sh
 
+```
+
+## `Development scripts`
+
+```sh
+vagrant ssh
+cd network/bin
+# initialize and launch dev setup
+./dev-init.sh
+# validate the dev environment
+./dev-validate.sh
+# stop containers -> (non-destructive)
+./dev.stop.sh
+# start the stopped containers
+./dev-start.sh
+# check the launch mode for the env (dev|net)
+./dev-mode.sh
+```
+
+## `Validate container health`
+
+```sh
+docker ps
+```
+
+## `Environment setup scrupts`
+
+```sh
+vagrant ssh
+# set environement variables for peer binary
+set-env.sh
+# shows the values set in environment variables
+show-env.sh
+```
+
+## `Set up the organisation context`
+
+```sh
+source set-env.sh  acme | budget # in source
+. set-env.sh  acme | budget # .
+```
+
+## `Getting the organisation context`
+
+```sh
+# print the current env context setup
+show-env.sh
+```
+
+## `Channel commands`
+
+```sh
+# peer channel help
+peer channel --help
+# List the channels peer has joined
+peer channel list
+# Get info about the blockchain
+peer channel getinfo -c airlinechannel
 
 
+## Manage lifecycle of chaincode
+peer lifecycle subcommand --flags || peer chaincode subcommand --flags
+# get help on it
+peer lifecycle chaincode -h
+
+## Get peers chaincode validated and up runnning
+peer lifecycle chaincode queryinstalled
+
+# With the accessible main apis
+execute logic - peer
+peer chaincode invoke
+# Read blockchain state
+peer chaincode query
+
+## With older versions of fabric ( below 2.x)
+peer chaincode install
+peer chaincode upgrade
+peer chaincode instantiate
+```
+
+
+## `Working of hyperledger explorer`
+
+```sh
+# Reset the explorer runtime
+exp-init.sh -e
+# Stop the running explorer containers
+exp-stop.sh
+# Restarts the explorer containers
+exp-start.sh  
 
 ```
+
 
 --------------------
 

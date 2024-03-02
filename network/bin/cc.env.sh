@@ -1,8 +1,8 @@
-# Generated: Sat Apr 25 12:31:05 UTC 2020
+# Generated: Sat Mar  2 15:09:59 UTC 2024
 export CC_LANGUAGE=golang
 export CC_PATH=chaincode_example02
 export CC_NAME=gocc
-export CC_VERSION=1
+export CC_VERSION=1.0
 export CC_CHANNEL_ID=airlinechannel
 export CC_CONSTRUCTOR='{"Args":["init","a","100","b","300"]}'
 export CC_QUERY_ARGS='{"Args":["query","b"]}'
