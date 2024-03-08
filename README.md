@@ -155,7 +155,7 @@ peer lifecycle chaincode approveformyorg -h
 peer lifecycle chaincode checkcommitreadiness <--flags> || -h
 
 # Peer lifecycle commit
-```sh
+
 peer lifecycle chaincode commit <--flags> || -h
 
 # Check commit status
