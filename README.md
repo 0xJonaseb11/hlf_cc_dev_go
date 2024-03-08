@@ -142,6 +142,15 @@ peer lifecycle chaincode -h
 ## Get peers chaincode validated and up runnning
 peer lifecycle chaincode queryinstalled
 
+# wait for commit confirmation on the peer
+peer lifecycle chaincode command --waitForEvent
+
+# Peer lifecycle chaincode approveFormyorg - all flags
+peer lifecycle chaincode approveformyorg -h
+
+# check ther orgs that have approved
+peer lifecycle chaincode checkcommitreadiness <--flags> || -h
+
 # With the accessible main apis
 execute logic - peer
 peer chaincode invoke
@@ -217,6 +226,18 @@ chain.sh install -p
 
 ```sh
 chain.sh queryinstalled
+```
+
+`Approve chaincode`
+
+```sh
+# Do the approval
+chain.sh approveformyorg || chain.sh approve
+
+# show which orgs have approved
+chain.sh checkcommitreadiness || chain.sh check
+```
+
 
 --------------------
 
