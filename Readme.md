@@ -1,13 +1,17 @@
 
 ####################### https://courses.pragmaticpaths.com ##############
+
 # Part of a course 'Mastering Fabric Chaincode Development using GoLang'#
-# http://www.bcmentors.com      raj@acloudfan.com                       #
+
+# http://www.bcmentors.com      raj@acloudfan.com #
+
 #########################################################################
 
 Change Log:
 ----------
 HLF-Dev-Chaincode-V2.1-1.0      April 25, 2020
 * Upgraded Ubuntu to 18.04 LTS
+  
 * Upgraded Fabric to 2.1
 * Upgraded Node to 12.13.6
 * Introduced VirtualBox Express setup - more info at network/setup/vexpress/README.md
@@ -41,9 +45,10 @@ HLF-Dev-Chaincode-V1.4-1.1      May 10, 2019
 
 HLF-Dev-Chaincode-V1.4-1.0      April 18, 2019
 
-
 #############################################
+
 # Setup Instructions: network/setup/README.md
+
 #############################################
 
 1. Initialize the Dev invironment
@@ -60,11 +65,11 @@ To get help
 > dev-init.sh -e
 > exp-stop.sh
 
-- At a later time
+  `At a later time`
 > exp-start.sh
 > exp-stop.sh
 
-3. Environment scripts
+1. Environment scripts
 
 - Set the org context
 >  .   set-env.sh    acme | budget
