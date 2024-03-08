@@ -175,7 +175,7 @@ chan.sh list # list of installed chaincode
 -o # Orderer address
 
 # With the accessible main apis
-execute logic - peer
+# execute logic - peer
 peer chaincode invoke
 # Read blockchain state
 peer chaincode query
@@ -237,8 +237,10 @@ peer lifecycle package tar-file --flags
 
 # Once you don't specify the path, it will beinstalled at
 $ CORE_PEER_ADDRESS
+```
 
-# Install chaincode using `chain.sh` utility
+## `Install chaincode using  'chain.sh'  utility`
+
 ```sh
 chain.sh install packge_name
 # Create a package and install chaincode on it
