@@ -133,8 +133,11 @@ peer channel list
 # Get info about the blockchain
 peer channel getinfo -c airlinechannel
 
+```
 
-## Manage lifecycle of chaincode
+# `Manage lifecycle of chaincode`
+
+```sh
 peer lifecycle subcommand --flags || peer chaincode subcommand --flags
 # get help on it
 peer lifecycle chaincode -h
@@ -150,6 +153,26 @@ peer lifecycle chaincode approveformyorg -h
 
 # check ther orgs that have approved
 peer lifecycle chaincode checkcommitreadiness <--flags> || -h
+
+# Peer lifecycle commit
+```sh
+peer lifecycle chaincode commit <--flags> || -h
+
+# Check commit status
+peer lifecycle chaincode querycommitted
+
+# Alternatively, you can check and commit with `chain.sh`
+chain.sh commit # commit 
+chain.sh querycommitted # status of commit
+chan.sh list # list of installed chaincode
+
+# Common lifecycle flags used 
+-n -v # Name && version of chaincode
+-C --channelID # channel ID
+-sequence # sequence number on the CC
+--init-required # indicates if initialization is required
+--peerAddresses # endorsing peers
+-o # Orderer address
 
 # With the accessible main apis
 execute logic - peer
@@ -231,11 +254,21 @@ chain.sh queryinstalled
 `Approve chaincode`
 
 ```sh
+. set-chain-env.sh acme
 # Do the approval
 chain.sh approveformyorg || chain.sh approve
 
 # show which orgs have approved
 chain.sh checkcommitreadiness || chain.sh check
+
+# Chain.sh foe CC instantiation
+chain.sh instantiate # approves, commits and inits the chaincode
+```
+
+`set the initialization status`
+
+```sh
+set-chain-env.sh -I false || true
 ```
 
 
