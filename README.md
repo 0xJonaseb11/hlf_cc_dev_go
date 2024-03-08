@@ -135,7 +135,7 @@ peer channel getinfo -c airlinechannel
 
 ```
 
-# `Manage lifecycle of chaincode`
+## `Manage lifecycle of chaincode`
 
 ```sh
 peer lifecycle subcommand --flags || peer chaincode subcommand --flags
@@ -251,7 +251,7 @@ chain.sh install -p
 chain.sh queryinstalled
 ```
 
-`Approve chaincode`
+## `Approve chaincode`
 
 ```sh
 . set-chain-env.sh acme
@@ -265,12 +265,47 @@ chain.sh checkcommitreadiness || chain.sh check
 chain.sh instantiate # approves, commits and inits the chaincode
 ```
 
-`set the initialization status`
+## `set the initialization status`
 
 ```sh
 set-chain-env.sh -I false || true
 ```
 
+## `Query and invoke interfaces`
+
+## `query`
+
+```sh
+set-chain-env.sh -i # CC_INVOKE_ARGS
+# for query 
+set-chain-env.sh -q # CC_QUERY_ARGS
+
+# Real query operations
+set-chain-env.sh -q '{"Args":["query","a"]}' # set args
+chain.sh query # get result
+```
+
+## `invoke`
+
+```sh
+set-chain-env.sh -i '{"Args":["invoke","a","b","5"]}'
+chan.sh invoke
+chain.sh query
+```
+
+## With init
+
+```sh
+set-chain-env.sh -C # CC_CONSTRUCTOR
+
+```
+
+## _**`NOTE:: init MUST be executed before Invoke and Query operations`**_
+
+```sh
+chain.sh init -o
+chain.sh init
+```
 
 --------------------
 
