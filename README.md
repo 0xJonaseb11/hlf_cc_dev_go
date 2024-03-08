@@ -189,15 +189,34 @@ chain.sh query
 # Let's get the command the chain.sh will execute
 chain.sh querycommitted -o
 
-
-
-
 ## Get every list of flags
 set-chain-env.sh -h
 
-
 ```
 
+## `Peer lifecycle package installation`
+
+```sh
+peer lifecycle package tar-file --flags
+# Important flags to consider
+--peerAddress -> Target peer(multiple may be specified)
+--label -> Label for the chaincode
+-p -> path for the chaincode
+
+# Once you don't specify the path, it will beinstalled at
+$ CORE_PEER_ADDRESS
+
+# Install chaincode using `chain.sh` utility
+```sh
+chain.sh install packge_name
+# Create a package and install chaincode on it
+chain.sh install -p
+```
+
+## `Retrieve list of chaincodes installed`
+
+```sh
+chain.sh queryinstalled
 
 --------------------
 
