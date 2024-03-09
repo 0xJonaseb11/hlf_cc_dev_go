@@ -164,7 +164,7 @@ peer lifecycle chaincode querycommitted
 # Alternatively, you can check and commit with `chain.sh`
 chain.sh commit # commit 
 chain.sh querycommitted # status of commit
-chan.sh list # list of installed chaincode
+chain.sh list # list of installed chaincode
 
 # Common lifecycle flags used 
 -n -v # Name && version of chaincode
@@ -291,11 +291,11 @@ chain.sh query # get result
 
 ```sh
 set-chain-env.sh -i '{"Args":["invoke","a","b","5"]}'
-chan.sh invoke
+chain.sh invoke
 chain.sh query
 ```
 
-## With init
+## `With init`
 
 ```sh
 set-chain-env.sh -C # CC_CONSTRUCTOR
@@ -307,6 +307,36 @@ set-chain-env.sh -C # CC_CONSTRUCTOR
 ```sh
 chain.sh init -o
 chain.sh init
+```
+
+## `Chaincode update and Upgrade`
+
+```sh
+set-chain-env.sh -v <version> # set chaincode version 
+# Updating chaincode parameters
+set-chain-env.sh -s <sequence_no> # New sequence number
+set-chain-env.sh -v <version> # Version of the chaincode
+set-chain-env.sh -I <boolean> # Initialization true | false
+set-chain-env.sh -g, -G # Specify Endorsement policy
+set-chain-env.sh -R # Private data collection
+```
+
+trial task
+
+```sh
+set-chain-env.sh -v 2.1
+set-chain-env.sh -s 4
+chain.sh package
+chain.sh install
+chain.sh approve -o
+chain.sh approve
+chain.sh commit
+```
+
+## `Chain.sh for automatic updates`
+
+```sh
+chain.sh upgrade-auto
 ```
 
 --------------------
