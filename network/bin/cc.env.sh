@@ -1,8 +1,8 @@
-# Generated: Sat Mar  9 07:24:14 UTC 2024
+# Generated: Sat Mar  9 07:26:05 UTC 2024
 export CC_LANGUAGE=golang
 export CC_PATH=token/v1
 export CC_NAME=token
-export CC_VERSION=1.0
+export CC_VERSION=2.1
 export CC_CHANNEL_ID=airlinechannel
 export CC_CONSTRUCTOR='{"Args":["init"]}'
 export CC_QUERY_ARGS='{"Args":["query","b"]}'

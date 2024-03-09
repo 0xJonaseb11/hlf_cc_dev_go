@@ -101,19 +101,25 @@ set-chain-env.sh   -n  token   -p token/v1    -c '{"Args": ["init"]}'
 
 <<Terminal #2>>
 
-- Start the chaincode
+`Start the chaincode`
+
+```sh
 . set-env.sh acme
 cc-run.sh
+```
 
 ## `3`
 
 <<Terminal #1>>
 
-- Install & Instantiate the chaincode
-chain.sh    install
-chain.sh    instantiate                             <<Observe terminal#2>>
+`Install & Instantiate the chaincode`
+  
+  ```sh
+chain.sh install
+chain.sh instantiate                             <<Observe terminal#2>>
+```
 
-Checkout explorer - you should see 1 transaction against the chaicode 'token'
+## `Checkout explorer - you should see 1 transaction against the chaicode 'token'`
 
 ## `4`
 
