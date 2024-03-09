@@ -361,12 +361,17 @@ cc-run.sh
 ## Terminal 2
 
 ```sh
-
 . set-env.sh acme
 chain.sh instantiate
 chain.sh invoke
 chain.sh query
 ```
+
+## `chaincode logging`
+
+```sh
+set-chain-env.sh -L <level> # provided as a string
+set-chain-env.sh -S <level> # provided as a string
 
 
 --------------------
