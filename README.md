@@ -339,6 +339,36 @@ chain.sh commit
 chain.sh upgrade-auto
 ```
 
+## `Peer launch modes - Net && Dev modes`
+
+```sh
+cc-build.sh # Builds the chaincode using: `go build $CC_PATH
+cc-run.sh # Runs chaincode with : `go run $GOPATH/src/$CC_PATH/*.go`
+```
+
+## `dev mode` - Terminal 1
+
+```sh
+# Peer launch dev mode
+## Terminal 1
+dev-init.sh -d
+. set-env.sh acme
+set-chain-env.sh
+chain.sh install
+cc-run.sh 
+```
+
+## Terminal 2
+
+```sh
+
+. set-env.sh acme
+chain.sh instantiate
+chain.sh invoke
+chain.sh query
+```
+
+
 --------------------
 
 @Jaz-3-0

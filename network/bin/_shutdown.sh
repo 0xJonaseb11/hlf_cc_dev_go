@@ -1,4 +1,4 @@
-#PEER_MODE=net
-#Command=dev-init.sh  
-#Generated: Fri Mar  8 23:15:10 UTC 2024 
-docker-compose  -f ./compose/docker-compose.base.yaml        down 
+#PEER_MODE=dev
+#Command=dev-init.sh -d 
+#Generated: Sat Mar  9 02:22:28 UTC 2024 
+docker-compose  -f ./compose/docker-compose.base.yaml    -f ./compose/docker-compose.dev.yaml      down 
