@@ -30,7 +30,7 @@ curl --version
 orderer version
 peer version
 go --version
-vagrant --version
+vagrant --versionr
 
  ```
 
