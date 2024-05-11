@@ -1,72 +1,93 @@
 # Shows the use of shim functions
+
 - token.go      V3 of token
 - proposal.go   Shows extraction of info from SignedProposal
 
-
 Part-1
+
 ======
+
 Demonstrates the use of stub.GetTxID(), stub.GetChannelID() and stub.GetTxTimestamp()
 
-# 1. Init the environment
+## 1. Init the environment
+
+```sh
 dev-init.sh
 
 source set-env.sh acme
+```
 
-# 2. Install & Instantiate the chaincode
+## 2. Install & Instantiate the chaincode
 
+```sh
 set-chain-env.sh -n token -p token/v3
 
 chain.sh install -p
 
 chain.sh instantiate 
+```
 
-# 3. Start following the log
+## 3. Start following the log
 
+```sh
 cc-logs.sh -f
+```
 
-# 4. Open a new terminal
+## 4. Open a new terminal
 
+```sh
 .  set-env.sh acme
 
 chain.sh invoke
+```
 
-# 5. Check out the output in Terminal #1
+## 5. Check out the output in Terminal #1
 
 Part-2
+
 ======
 
-# 1. Install the latest version of the chaincode
+## 1. Install the latest version of the chaincode
 
+```sh
 chain.sh install-auto
 
 set-chain-env.sh -s 2
 
 chain.sh instantiate
+```
 
-# 2. Follow the logs
+## 2. Follow the logs
 
+```sh
 cc-logs.sh -f
+```
 
-# 3. Invoke the chaincode in terminal #2
+## 3. Invoke the chaincode in terminal #2
 
+```sh
 chain.sh invoke
+```
 
-# 3. Observe the output in terminal #1
+## 3. Observe the output in terminal #1
 
+## GET THE Package otherwise you *MAY* get an error :)
 
-
-# GET THE Package otherwise you *MAY* get an error :)
+```sh
 go get github.com/golang/protobuf/proto
+```
 
-# Note: 
+## `Note:`
+
 - In order to follow the code in proposal.go you MUST understand ProtoBuffers
 - Refer to the documentation/links on the details of the various buffer structures
-- Peer Proto Definition 
-https://godoc.org/github.com/hyperledger/fabric/protos/peer
+- Peer Proto Definition
+<https://godoc.org/github.com/hyperledger/fabric/protos/peer>
 - Common Proto Definitions
-https://godoc.org/github.com/hyperledger/fabric/protos/common
+<https://godoc.org/github.com/hyperledger/fabric/protos/common>
 - Proposal proto buffer definitions
-https://github.com/hyperledger/fabric-protos-go/blob/master/peer/proposal.pb.go
+<https://github.com/hyperledger/fabric-protos-go/blob/master/peer/proposal.pb.go>
 
-
+```sh
 go get -u github.com/golang/protobuf/protoc-gen-go
+```
