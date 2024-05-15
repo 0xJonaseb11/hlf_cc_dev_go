@@ -4,6 +4,7 @@
 - proposal.go   Shows extraction of info from SignedProposal
 
 Part-1
+￼
 
 ======
 
