@@ -389,6 +389,12 @@ set-chain-env.sh -n token -p token/v3
 chain.sh install -p
 # instantiate the chaincode
 chain.sh instantiate
+# start following the logs
+cc-logs.sh -f
+
+## In a new terminal
+. set-env.sh acme
+chain.sh invoke
 ```
 
 --------------------
