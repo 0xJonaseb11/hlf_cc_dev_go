@@ -1,4 +1,4 @@
-# Generated: Wed Jun  5 03:12:22 UTC 2024
+# Generated: Wed Jun  5 03:31:16 UTC 2024
 export CC_LANGUAGE=golang
 export CC_PATH=token/v3
 export CC_NAME=token
@@ -12,7 +12,7 @@ export CORE_CHAINCODE_LOGGING_LEVEL=''
 export CORE_CHAINCODE_LOGGING_SHIM=''
 export CC_PRIVATE_DATA_JSON=''
 export CC_ENDORSEMENT_POLICY=""
-export CC2_SEQUENCE="1"
+export CC2_SEQUENCE="2"
 export CC2_INIT_REQUIRED="true"
 export CC2_PACKAGE_FOLDER="/home/vagrant/packages"
 export CC2_SIGNATURE_POLICY=""

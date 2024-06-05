@@ -51,8 +51,9 @@ Part-2
 ## 1. Install the latest version of the chaincode
 
 ```sh
+# automatically install chaincode
 chain.sh install-auto
-
+# set sequence
 set-chain-env.sh -s 2
 
 chain.sh instantiate
