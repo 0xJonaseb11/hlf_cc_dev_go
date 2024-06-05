@@ -52,7 +52,7 @@ func (token *TokenChaincode) Invoke(stub shim.ChaincodeStubInterface) peer.Respo
 	
 	// V3
 	// Extract the information from proposal 
-	// PrintSignedProposalInfo(stub)
+	PrintSignedProposalInfo(stub)
 
 	// V3
 	// Will receieve empty map unless client set the transient data in Tx Proposal

@@ -8,7 +8,7 @@ Part-1
 
 ======
 
-Demonstrates the use of stub.GetTxID(), stub.GetChannelID() and stub.GetTxTimestamp()
+Demonstrates the use of `stub.GetTxID()`, `stub.GetChannelID()` and `stub.GetTxTimestamp()`
 
 ## 1. Init the environment
 
