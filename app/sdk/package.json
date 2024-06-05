@@ -9,6 +9,7 @@
   "author": "raj@acloudfan.com",
   "license": "ISC",
   "dependencies": {
+    "asn1": "^0.2.6",
     "fabric-client": "^1.4.0",
     "fabric-network": "^1.4.0",
     "fs": "0.0.1-security",

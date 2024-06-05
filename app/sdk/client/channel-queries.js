@@ -83,7 +83,7 @@ async function getChaincodeInfo(){
 /**
  * Demonstrates the use of query by chaincode
  */
-function queryERC20(){
+async function queryERC20(){
     // Execute the query
     chaincodes = await channel.queryByChaincode({
         chaincodeId: 'erc20',
