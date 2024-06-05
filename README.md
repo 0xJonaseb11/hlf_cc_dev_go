@@ -374,6 +374,23 @@ set-chain-env.sh -L <level> # provided as a string
 set-chain-env.sh -S <level> # provided as a string
 ```
 
+## `Accessing proposal elements`
+
+```sh
+vagrant up
+vagrant ssh
+# init dev env
+dev-init.sh
+source set-env.sh acme
+
+# Install && instantiate the chaincode
+set-chain-env.sh -n token -p token/v3
+# install the chaincode
+chain.sh install -p
+# instantiate the chaincode
+chain.sh instantiate
+```
+
 --------------------
 
 @0xJonaseb11
