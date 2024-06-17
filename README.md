@@ -1,6 +1,6 @@
 # Hyperledger_chaincode_dev
 
-_**Author: @Jaz-3-0**_
+_**Author: @0xJonaseb11**_
 
 ## About
 

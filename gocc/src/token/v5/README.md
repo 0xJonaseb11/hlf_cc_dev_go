@@ -59,5 +59,3 @@ Prior to running the test install & instantiate the chaincode
    chain.sh query
 
 
-
-

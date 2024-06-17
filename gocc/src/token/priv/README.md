@@ -366,10 +366,6 @@ peer chaincode instantiate -C "$CC_CHANNEL_ID" -n "$CC_NAME"  -v "$CC_VERSION" -
 
 
 
-
-
-
-
 Exercise (v.1.4)
 ================
 Install & Instantiate the token/priv chaincode using "peer chaincode instantiate .." command
