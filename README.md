@@ -1,4 +1,4 @@
-# Hyperledger_chaincode_dev
+# Hyperledger_fabric2.x_chaincode_development
 
 _**Author: @0xJonaseb11**_
 
@@ -30,8 +30,7 @@ curl --version
 orderer version
 peer version
 go --version
-vagrant --versionr
-
+vagrant --version
  ```
 
  ```sh
@@ -49,7 +48,6 @@ vagrant --versionr
  ./validate-explorer.sh
 # validate node
 node -v
-
  ```
 
 ## `Update git repo`
@@ -73,7 +71,6 @@ cd network/setup
 ./install-fabric.sh
 # install nodejs utilities
 ./install-node-utils.sh
-
 ```
 
 ## `Development scripts`
@@ -132,7 +129,6 @@ peer channel --help
 peer channel list
 # Get info about the blockchain
 peer channel getinfo -c airlinechannel
-
 ```
 
 ## `Manage lifecycle of chaincode`
@@ -155,7 +151,6 @@ peer lifecycle chaincode approveformyorg -h
 peer lifecycle chaincode checkcommitreadiness <--flags> || -h
 
 # Peer lifecycle commit
-
 peer lifecycle chaincode commit <--flags> || -h
 
 # Check commit status
@@ -223,7 +218,6 @@ chain.sh querycommitted -o
 
 ## Get every list of flags
 set-chain-env.sh -h
-
 ```
 
 ## `Peer lifecycle package installation`
@@ -299,7 +293,6 @@ chain.sh query
 
 ```sh
 set-chain-env.sh -C # CC_CONSTRUCTOR
-
 ```
 
 ## _**`NOTE:: init MUST be executed before Invoke and Query operations`**_
@@ -321,7 +314,7 @@ set-chain-env.sh -g, -G # Specify Endorsement policy
 set-chain-env.sh -R # Private data collection
 ```
 
-trial task
+`trial task`
 
 ```sh
 set-chain-env.sh -v 2.1
